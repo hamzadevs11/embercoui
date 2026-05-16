@@ -46,7 +46,23 @@ function Stars({ count }: { count: number }) {
 export default function Testimonials() {
   const { ref: headingRef, isInView: headingInView } = useInView();
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [cardVisible, setCardVisible] = useState<boolean[]>(new Array(reviews.length).fill(false));
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const scrollPosition = container.scrollLeft;
+      const firstChild = container.children[0] as HTMLElement;
+      if (firstChild) {
+        const cardWidth = firstChild.clientWidth;
+        const gap = 16;
+        const index = Math.round(scrollPosition / (cardWidth + gap));
+        setActiveIndex(Math.min(reviews.length - 1, Math.max(0, index)));
+      }
+    }
+  };
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
@@ -67,8 +83,8 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section id="testimonials" className="py-16" style={{ background: '#1C2B1E' }}>
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="testimonials" className="py-[48px] md:py-16" style={{ background: '#1C2B1E' }}>
+      <div className="max-w-7xl mx-auto px-[20px] md:px-6">
         <div ref={headingRef as React.RefObject<HTMLDivElement>} className={`text-center mb-10 reveal ${headingInView ? 'visible' : ''}`}>
           <p
             className="text-ember text-xs tracking-widest uppercase mb-3"
@@ -77,20 +93,25 @@ export default function Testimonials() {
             ✦ &nbsp; Guest Voices
           </p>
           <h2
-            className="text-white font-light leading-none"
-            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300, color: '#F5F0E8', fontSize: '36px' }}
+            className="text-white font-light leading-none text-[32px] md:text-[36px]"
+            style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300, color: '#F5F0E8' }}
           >
             What Our Guests Say
           </h2>
           <div className="w-12 h-px bg-ember mx-auto mt-4" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div 
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="flex md:grid md:grid-cols-3 flex-row overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none no-scrollbar gap-[16px] md:gap-6 -mx-[20px] px-[20px] pb-[16px] md:mx-0 md:px-0 md:pb-0"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           {reviews.map((review, i) => (
             <div
               key={review.id}
               ref={el => { cardRefs.current[i] = el; }}
-              className={`border border-white/10 p-6 hover:border-ember/40 transition-colors duration-300 reveal ${cardVisible[i] ? 'visible' : ''}`}
+              className={`shrink-0 snap-start w-[80vw] max-w-[300px] md:w-auto md:max-w-none border border-white/10 p-[24px_20px] md:p-6 hover:border-ember/40 transition-colors duration-300 reveal ${cardVisible[i] ? 'visible' : ''}`}
               style={{ background: 'rgba(255,255,255,0.03)', transitionDelay: `${i * 0.15}s` }}
             >
               <Stars count={review.stars} />
@@ -141,6 +162,18 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Mobile Scroll Indicator Dots */}
+        <div className="flex md:hidden justify-center items-center gap-2 mt-2">
+          {reviews.map((_, idx) => (
+            <div
+              key={idx}
+              className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+                activeIndex === idx ? 'bg-[#C17A3A]' : 'bg-white/20'
+              }`}
+            />
           ))}
         </div>
       </div>

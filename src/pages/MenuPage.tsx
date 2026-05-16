@@ -50,18 +50,18 @@ function useReveal<T extends HTMLElement>(delay = 0) {
 // ─── Skeleton card ────────────────────────────────────────────────────────────
 const SkeletonCard = memo(() => (
   <div className="overflow-hidden flex flex-col animate-pulse" style={{ background: '#1C2B1E' }}>
-    <div className="h-52 flex-shrink-0" style={{ background: '#0D1A0E' }} />
-    <div className="p-5 flex flex-col gap-3 flex-1">
-      <div className="flex justify-between gap-3">
-        <div className="h-5 rounded w-2/3" style={{ background: 'rgba(245,240,232,0.1)' }} />
-        <div className="h-5 rounded w-12" style={{ background: 'rgba(245,240,232,0.1)' }} />
+    <div className="h-[160px] md:h-52 flex-shrink-0" style={{ background: '#0D1A0E' }} />
+    <div className="p-0 pb-[14px] md:p-5 flex flex-col gap-3 flex-1">
+      <div className="flex flex-col md:flex-row justify-between gap-1 md:gap-3 pt-2 md:pt-0">
+        <div className="h-4 md:h-5 rounded w-2/3" style={{ background: 'rgba(245,240,232,0.1)' }} />
+        <div className="h-4 md:h-5 rounded w-12" style={{ background: 'rgba(245,240,232,0.1)' }} />
       </div>
-      <div className="space-y-2 flex-1">
+      <div className="hidden md:block space-y-2 flex-1">
         <div className="h-3 rounded w-full" style={{ background: 'rgba(245,240,232,0.05)' }} />
         <div className="h-3 rounded w-5/6" style={{ background: 'rgba(245,240,232,0.05)' }} />
         <div className="h-3 rounded w-3/4" style={{ background: 'rgba(245,240,232,0.05)' }} />
       </div>
-      <div className="h-11 rounded-none mt-auto" style={{ background: 'rgba(245,240,232,0.1)' }} />
+      <div className="h-[34px] md:h-11 rounded-none mt-auto" style={{ background: 'rgba(245,240,232,0.1)' }} />
     </div>
   </div>
 ));
@@ -78,7 +78,7 @@ const MenuCard = memo(({ item, isAdded, onAdd, index }: {
 
   return (
     <div ref={ref} className="c-hidden group overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-1" style={{ background: '#1C2B1E', border: '1px solid rgba(245,240,232,0.05)' }}>
-      <div className="relative h-52 overflow-hidden flex-shrink-0">
+      <div className="relative h-[160px] md:h-52 overflow-hidden flex-shrink-0">
         <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
         <img
           src={item.image}
@@ -88,30 +88,30 @@ const MenuCard = memo(({ item, isAdded, onAdd, index }: {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
       </div>
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-3 mb-3">
+      <div className="p-0 pb-[14px] md:p-6 flex flex-col flex-1">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-1 md:gap-3 mb-3 md:mb-3 pt-2 md:pt-0">
           <h3
-            className="text-[#F5F0E8] text-xl leading-tight tracking-wide"
+            className="text-[#F5F0E8] text-[16px] md:text-xl leading-tight tracking-wide mb-1 md:mb-0"
             style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
           >
             {item.name}
           </h3>
           <span
-            className="text-[#C17A3A] font-medium text-base flex-shrink-0"
+            className="text-[#C17A3A] font-medium text-[14px] md:text-base flex-shrink-0"
             style={{ fontFamily: 'Jost, sans-serif' }}
           >
             ${item.price}
           </span>
         </div>
         <p
-          className="text-[#F5F0E8]/60 text-[0.85rem] leading-relaxed mb-6 flex-1 font-light"
+          className="hidden md:block text-[#F5F0E8]/60 text-[0.85rem] leading-relaxed mb-6 flex-1 font-light"
           style={{ fontFamily: 'Jost, sans-serif' }}
         >
           {item.description}
         </p>
 
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="hidden md:flex flex-wrap gap-2 mb-6">
             {tags.map(tag => (
               <span
                 key={tag}
@@ -124,21 +124,23 @@ const MenuCard = memo(({ item, isAdded, onAdd, index }: {
           </div>
         )}
 
-        <button
-          onClick={() => onAdd(item)}
-          className={`mt-auto w-full flex items-center justify-center gap-[8px] px-[20px] py-[14px] rounded-none uppercase transition-all duration-300 ease-out border ${
-            isAdded
-              ? 'bg-[#2E7D32] border-[#2E7D32] text-[#F5F0E8]'
-              : 'bg-transparent text-[#C17A3A] border-[#C17A3A]/30 hover:bg-[#C17A3A] hover:border-[#C17A3A] hover:text-white'
-          }`}
-          style={{ fontFamily: 'Jost, sans-serif', letterSpacing: '0.15em', fontSize: '10px' }}
-        >
-          {isAdded ? (
-            <><Check size={14} /> Added</>
-          ) : (
-            <><Plus size={14} /> Add to Cart</>
-          )}
-        </button>
+        <div className="mt-auto">
+          <button
+            onClick={() => onAdd(item)}
+            className={`w-full flex items-center justify-center gap-[8px] p-[10px] md:px-[20px] md:py-[14px] text-[10px] md:text-[10px] tracking-[0.1em] md:tracking-[0.15em] rounded-none uppercase transition-all duration-300 ease-out border ${
+              isAdded
+                ? 'bg-[#2E7D32] border-[#2E7D32] text-[#F5F0E8]'
+                : 'bg-transparent text-[#C17A3A] border-[#C17A3A]/30 hover:bg-[#C17A3A] hover:border-[#C17A3A] hover:text-white'
+            }`}
+            style={{ fontFamily: 'Jost, sans-serif' }}
+          >
+            {isAdded ? (
+              <><Check size={14} /> <span className="hidden md:inline">Added</span></>
+            ) : (
+              <><Plus size={14} /> Add to Cart</>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -207,41 +209,58 @@ export default function MenuPage() {
       `}</style>
       <div className="min-h-screen bg-[#0D1A0E] pt-[80px]">
         
-        {/* HEADER */}
-      <header className="bg-[#1C2B1E] w-full pt-20 pb-24 relative px-6 border-b border-[#C17A3A]/10">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <a
-            href="/"
-            onClick={handleNavigateHome}
-            className="inline-flex items-center gap-2 text-[#C17A3A] hover:text-[#A66932] transition-colors mb-8 text-sm font-medium tracking-wider uppercase"
-            style={{ fontFamily: 'Jost, sans-serif' }}
-          >
-            <ArrowLeft size={16} /> Back to Home
-          </a>
+        {/* BACK TO HOME */}
+        <div className="w-full bg-[#0D1A0E]">
+          <div className="max-w-7xl mx-auto">
+            <a
+              href="/"
+              onClick={handleNavigateHome}
+              className="inline-block text-[#C17A3A] hover:text-[#A66932] transition-colors text-[12px] px-[24px] py-[12px]"
+              style={{ fontFamily: 'Jost, sans-serif' }}
+            >
+              ← Back to Home
+            </a>
+          </div>
+        </div>
 
-          <div className="flex flex-col">
+        {/* HERO HEADER */}
+        <header className="relative w-full h-[45vh] min-h-[300px] flex items-center justify-center overflow-hidden">
+          {/* Background Image & Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80" 
+              alt="Our Menu" 
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[rgba(10,18,10,0.75)]" />
+          </div>
+
+          {/* Centered Content */}
+          <div className="relative z-10 flex flex-col items-center text-center px-6">
             <span
-              className="text-[#C17A3A] text-xs tracking-[0.25em] uppercase mb-4"
+              className="text-[#C17A3A] text-[10px] tracking-[0.25em] uppercase mb-[16px]"
               style={{ fontFamily: 'Jost, sans-serif' }}
             >
               ✦ Our Menu
             </span>
             <h1
-              className="text-[#F5F0E8] text-5xl md:text-[56px] leading-tight mb-6"
-              style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}
+              className="text-[#F5F0E8] leading-[1.1] mb-0"
+              style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300, fontSize: 'clamp(40px, 6vw, 72px)' }}
             >
               Seasonal Creations
             </h1>
-            <div className="w-16 h-[1px] bg-[#C17A3A] mb-6" />
+            <div className="w-[48px] h-[1px] bg-[#C17A3A] my-[20px]" />
             <p
-              className="text-[#F5F0E8]/70 text-lg font-light max-w-md"
-              style={{ fontFamily: 'Jost, sans-serif' }}
+              className="text-[14px] tracking-[0.05em]"
+              style={{ fontFamily: 'Jost, sans-serif', color: 'rgba(245,240,232,0.6)', fontWeight: 300 }}
             >
               Crafted from nature's finest ingredients
             </p>
           </div>
-        </div>
-      </header>
+
+          {/* Smooth Fade to Bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#0D1A0E] z-10" />
+        </header>
 
       {/* CONTENT AREA */}
       <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row gap-12">
@@ -344,7 +363,7 @@ export default function MenuPage() {
           {/* Grid */}
           {isLoading ? (
             /* Skeleton loading state — 3 placeholder cards */
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               <SkeletonCard />
               <SkeletonCard />
               <SkeletonCard />
@@ -354,7 +373,7 @@ export default function MenuPage() {
               No dishes found matching your criteria.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {filteredItems.map((item, index) => (
                 <MenuCard
                   key={item.id}

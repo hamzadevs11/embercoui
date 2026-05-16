@@ -10,21 +10,32 @@ export default function FloatingButtons() {
 
   return (
     <>
-      {/* AI Chatbot Window Placeholder */}
+      {/* Mobile AI Chatbot Overlay */}
       <div 
-        className={`fixed bottom-[100px] right-8 w-[350px] bg-white rounded-2xl shadow-2xl z-[55] overflow-hidden transition-all duration-300 origin-bottom-right border border-black/10 flex flex-col ${
-          isChatOpen ? 'scale-100 opacity-100 visible' : 'scale-90 opacity-0 invisible pointer-events-none'
+        className={`md:hidden fixed inset-0 z-[998] transition-opacity duration-300 ${
+          isChatOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ height: '500px', maxHeight: 'calc(100vh - 120px)' }}
+        style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
+        onClick={() => setIsChatOpen(false)}
+      />
+
+      {/* AI Chatbot Window */}
+      <div 
+        className={`fixed bg-white shadow-2xl flex flex-col overflow-hidden transition-all duration-300 border border-black/10
+          top-1/2 left-1/2 w-[calc(100vw-32px)] max-w-[420px] h-[75vh] max-h-[600px] z-[999] rounded-[16px] origin-center -translate-x-1/2 -translate-y-1/2
+          md:top-auto md:left-auto md:bottom-[100px] md:right-8 md:w-[350px] md:h-[500px] md:max-h-[calc(100vh-120px)] md:z-[55] md:rounded-2xl md:origin-bottom-right md:translate-x-0 md:translate-y-0
+          ${isChatOpen ? 'scale-100 opacity-100 visible' : 'scale-90 opacity-0 invisible pointer-events-none'}
+        `}
       >
-        <div className="bg-[#C17A3A] p-4 text-white flex justify-between items-center shrink-0">
+        {/* Header */}
+        <div className="bg-[#C17A3A] h-[56px] px-[20px] text-white flex justify-between items-center shrink-0">
           <div className="flex items-center gap-2">
             <span className="text-xl" style={{ fontFamily: 'Cormorant Garamond, serif' }}>✦</span>
-            <span style={{ fontFamily: 'Jost, sans-serif' }} className="font-medium">Ember AI</span>
+            <span style={{ fontFamily: 'Jost, sans-serif' }} className="font-medium text-[14px]">Ember AI</span>
           </div>
           <button 
             onClick={() => setIsChatOpen(false)} 
-            className="hover:opacity-75 transition-opacity"
+            className="hover:opacity-75 transition-opacity text-white"
             aria-label="Close Chat"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -32,18 +43,35 @@ export default function FloatingButtons() {
             </svg>
           </button>
         </div>
-        <div className="flex-1 p-6 flex flex-col bg-[#F5F0E8] items-center justify-center text-center overflow-y-auto">
-          <div className="w-16 h-16 bg-[#C17A3A]/10 rounded-full flex items-center justify-center mb-4">
+        
+        {/* Body */}
+        <div className="flex-1 pt-[32px] px-[24px] pb-[32px] flex flex-col bg-[#FDFAF5] items-center justify-center text-center overflow-y-auto">
+          <div className="w-16 h-16 bg-[#C17A3A]/10 rounded-full flex items-center justify-center mb-4 shrink-0">
             <span className="text-3xl text-[#C17A3A]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>✦</span>
           </div>
-          <h3 className="text-xl font-medium mb-2" style={{ fontFamily: 'Cormorant Garamond, serif', color: '#0c130d' }}>
+          <h3 className="text-xl font-medium mb-2 shrink-0" style={{ fontFamily: 'Cormorant Garamond, serif', color: '#1C2B1E' }}>
             Ember AI Assistant
           </h3>
-          <p className="text-sm opacity-70 max-w-[250px] mb-8" style={{ fontFamily: 'Jost, sans-serif' }}>
+          <p className="text-[13px] opacity-70 max-w-[250px] shrink-0" style={{ fontFamily: 'Jost, sans-serif' }}>
             I'm here to help with reservations, menu questions, and private events.
           </p>
-          <div className="px-4 py-2 bg-white rounded-full text-xs shadow-sm opacity-50 italic">
-            Chat functionality coming soon...
+        </div>
+
+        {/* Bottom Input */}
+        <div className="bg-white border-t border-black/5 p-3 shrink-0">
+          <div className="flex items-center gap-2 bg-[#F5F0E8] rounded-full px-4 py-2">
+            <input 
+              type="text" 
+              placeholder="Ask anything..." 
+              className="flex-1 bg-transparent border-none outline-none text-sm text-[#1C2B1E] placeholder:text-[#1C2B1E]/40"
+              style={{ fontFamily: 'Jost, sans-serif' }}
+              readOnly
+            />
+            <button className="w-8 h-8 rounded-full bg-[#C17A3A] text-white flex items-center justify-center shrink-0 hover:bg-[#A66932] transition-colors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-1">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>

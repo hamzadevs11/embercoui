@@ -54,7 +54,7 @@ export default function MenuSection() {
 
   return (
     <section id="menu" className="py-24 bg-cream-200" style={{ background: '#F5F0E8' }}>
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section header */}
         <div
           ref={headingRef as React.RefObject<HTMLDivElement>}
@@ -94,15 +94,15 @@ export default function MenuSection() {
         </div>
 
         {/* Mobile scrollable pill tabs */}
-        <div className="flex md:hidden gap-2.5 overflow-x-auto no-scrollbar pb-4 mb-10">
+        <div className="flex md:hidden gap-2.5 overflow-x-auto no-scrollbar pb-4 mb-10 -mx-4 px-4">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveTab(cat)}
-              className={`flex-shrink-0 px-5 py-2 rounded-full text-xs tracking-widest uppercase transition-all duration-[250ms] border ${
+              className={`flex-shrink-0 px-5 py-2 rounded-full text-xs tracking-widest uppercase transition-all duration-[250ms] ${
                 activeTab === cat
-                  ? 'bg-[#1C2B1E] text-[#F5F0E8] border-[#1C2B1E]'
-                  : 'bg-transparent text-[#1C2B1E]/50 border-[rgba(28,43,30,0.2)] hover:border-[#C17A3A] hover:text-[#C17A3A]'
+                  ? 'bg-[#1C2B1E] text-white border border-transparent'
+                  : 'bg-white text-[#1C2B1E] border border-[rgba(28,43,30,0.2)] hover:border-[#C17A3A] hover:text-[#C17A3A]'
               }`}
               style={{ fontFamily: 'Jost, sans-serif', fontSize: '0.75rem' }}
             >
@@ -112,57 +112,59 @@ export default function MenuSection() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-[12px] md:gap-6">
           {filtered.map((item, i) => (
             <div
               key={item.id}
               ref={el => { cardRefs.current[i] = el; }}
-              className={`group bg-white overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 reveal ${cardVisible[i] ? 'visible' : ''}`}
+              className={`group bg-white overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.08)] md:shadow-sm hover:shadow-md transition-shadow duration-300 reveal flex flex-col rounded-none md:rounded-none border-none ${cardVisible[i] ? 'visible' : ''}`}
               style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
             >
-              <div className="relative h-52 overflow-hidden">
+              <div className="relative h-[180px] md:h-52 overflow-hidden flex-shrink-0 w-full">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3 mb-2">
+              <div className="pt-[12px] px-[12px] pb-[14px] md:p-5 flex flex-col flex-1">
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-0 md:gap-3 mb-0 md:mb-2">
                   <h3
-                    className="text-forest text-xl leading-tight"
-                    style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 500 }}
+                    className="text-[#1C2B1E] md:text-forest text-[17px] md:text-xl leading-tight mb-[2px] md:mb-0 font-medium"
+                    style={{ fontFamily: 'Cormorant Garamond, serif' }}
                   >
                     {item.name}
                   </h3>
                   <span
-                    className="text-ember font-semibold text-base flex-shrink-0"
-                    style={{ fontFamily: 'Jost, sans-serif' }}
+                    className="text-[#C17A3A] md:text-ember text-[15px] md:text-base flex-shrink-0 mb-[10px] md:mb-0 md:font-semibold"
                   >
-                    ${item.price}
+                    <span className="md:hidden" style={{ fontFamily: 'Cormorant Garamond, serif' }}>${item.price.toFixed(2)}</span>
+                    <span className="hidden md:inline" style={{ fontFamily: 'Jost, sans-serif' }}>${item.price}</span>
                   </span>
                 </div>
                 <p
-                  className="text-forest/60 text-sm leading-relaxed mb-5"
+                  className="hidden md:block text-forest/60 text-sm leading-relaxed mb-5 flex-1"
                   style={{ fontFamily: 'Jost, sans-serif', fontWeight: 300 }}
                 >
                   {item.description}
                 </p>
-                <button
-                  onClick={() => handleAdd(item)}
-                  className={`w-full flex items-center justify-center gap-[8px] px-[20px] py-[12px] rounded-none uppercase border transition-all duration-300 ease-out ${
-                    added === item.id
-                      ? 'bg-[#2E7D32] border-[#2E7D32] text-[#F5F0E8]'
-                      : 'bg-[#1C2B1E] text-[#F5F0E8] border-white/10 hover:bg-[#C17A3A] hover:border-[#C17A3A] hover:-translate-y-[1px] hover:shadow-[0_4px_20px_rgba(193,122,58,0.3)]'
-                  }`}
-                  style={{ fontFamily: 'Jost, sans-serif', letterSpacing: '0.12em', fontSize: '11px' }}
-                >
-                  {added === item.id ? (
-                    <><Check size={14} /> Added</>
-                  ) : (
-                    <><Plus size={14} /> Add to Cart</>
-                  )}
-                </button>
+                <div className="mt-auto">
+                  <button
+                    onClick={() => handleAdd(item)}
+                    className={`w-full flex items-center justify-center gap-[8px] p-[10px] md:px-[20px] md:py-[12px] text-[10px] md:text-[11px] tracking-[0.12em] rounded-none uppercase border-none md:border transition-all duration-300 ease-out ${
+                      added === item.id
+                        ? 'bg-[#2E7D32] md:border-[#2E7D32] text-white'
+                        : 'bg-[#1C2B1E] text-white md:border-white/10 hover:bg-[#C17A3A] md:hover:border-[#C17A3A] hover:-translate-y-[1px] md:hover:shadow-[0_4px_20px_rgba(193,122,58,0.3)]'
+                    }`}
+                    style={{ fontFamily: 'Jost, sans-serif' }}
+                  >
+                    {added === item.id ? (
+                      <><Check size={14} className="hidden md:block" /> Added</>
+                    ) : (
+                      <><Plus size={14} className="hidden md:block" /> Add to Cart</>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
