@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, memo, useCallback } from 'react';
-import { Plus, Check, Search, ArrowLeft } from 'lucide-react';
+import { Plus, Check, Search } from 'lucide-react';
 import { categories, menuItems, MenuItem } from '../data/menu.ts';
 import { useCart } from '../context/CartContext.tsx';
 

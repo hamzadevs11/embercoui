@@ -6,15 +6,17 @@ import { useInView } from '../hooks/useInView.ts';
 
 export default function MenuSection() {
   const [activeTab, setActiveTab] = useState('All');
-  const [added, setAdded] = useState<number | null>(null);
+  const [addedIds, setAddedIds] = useState<number[]>([]);
   const { addItem } = useCart();
 
   const filtered = activeTab === 'All' ? menuItems : menuItems.filter(i => i.category === activeTab);
 
   const handleAdd = (item: typeof menuItems[0]) => {
     addItem({ id: item.id, name: item.name, price: item.price, image: item.image });
-    setAdded(item.id);
-    setTimeout(() => setAdded(null), 1500);
+    setAddedIds(prev => [...prev, item.id]);
+    setTimeout(() => {
+      setAddedIds(prev => prev.filter(id => id !== item.id));
+    }, 1500);
   };
 
   const { ref: headingRef, isInView: headingInView } = useInView();
@@ -155,13 +157,13 @@ export default function MenuSection() {
                   <button
                     onClick={() => handleAdd(item)}
                     className={`w-full flex items-center justify-center gap-[8px] p-[10px] md:px-[20px] md:py-[12px] text-[10px] md:text-[11px] tracking-[0.12em] rounded-none uppercase border-none md:border transition-all duration-300 ease-out ${
-                      added === item.id
+                      addedIds.includes(item.id)
                         ? 'bg-[#2E7D32] md:border-[#2E7D32] text-white'
                         : 'bg-[#1C2B1E] text-white md:border-white/10 hover:bg-[#C17A3A] md:hover:border-[#C17A3A] hover:-translate-y-[1px] md:hover:shadow-[0_4px_20px_rgba(193,122,58,0.3)]'
                     }`}
                     style={{ fontFamily: 'Jost, sans-serif' }}
                   >
-                    {added === item.id ? (
+                    {addedIds.includes(item.id) ? (
                       <><Check size={14} className="hidden md:block" /> Added</>
                     ) : (
                       <><Plus size={14} className="hidden md:block" /> Add to Cart</>

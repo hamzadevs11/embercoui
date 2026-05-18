@@ -6,7 +6,12 @@ interface Props {
   onNavigate: (path: string) => void;
 }
 
-const InputField = ({ label, type = 'text', value, onChange, error, ...props }: any) => {
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error?: string;
+}
+
+const InputField = ({ label, type = 'text', value, onChange, error, ...props }: InputFieldProps) => {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
   
@@ -176,7 +181,7 @@ export default function LoginModal({ onClose, onNavigate }: Props) {
               label="Email Address" 
               type="email" 
               value={email} 
-              onChange={(e: any) => setEmail(e.target.value)} 
+              onChange={(e) => setEmail(e.target.value)} 
               error={errors.email}
             />
             
@@ -185,7 +190,7 @@ export default function LoginModal({ onClose, onNavigate }: Props) {
                 label="Password" 
                 type="password" 
                 value={password} 
-                onChange={(e: any) => setPassword(e.target.value)} 
+                onChange={(e) => setPassword(e.target.value)} 
                 error={errors.password}
               />
               <div className="flex justify-end mt-1">

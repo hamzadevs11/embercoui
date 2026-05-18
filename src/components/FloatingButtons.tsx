@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function FloatingButtons() {
   const [isOpen, setIsOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  useEffect(() => {
+    if (isChatOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isChatOpen]);
 
   // Transitions
   const springTransition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
@@ -82,7 +91,10 @@ export default function FloatingButtons() {
       </div>
 
       {/* Speed Dial System */}
-      <div className="fixed inset-0 pointer-events-none z-[60]">
+      <div 
+        className={`fixed inset-0 z-[60] ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        onClick={() => { if (isOpen) setIsOpen(false); }}
+      >
         
         {/* BUTTON 2: AI Chat */}
         <div 

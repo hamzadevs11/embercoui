@@ -2,9 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Leaf, ChefHat, Sprout } from 'lucide-react';
 
 /* ─── Scroll reveal hook ──────────────────────────────────────────────────── */
-function useScrollReveal<T extends HTMLElement>(
-  options: IntersectionObserverInit = {}
-) {
+function useScrollReveal<T extends HTMLElement>() {
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -22,7 +20,7 @@ function useScrollReveal<T extends HTMLElement>(
               obs.disconnect();
             }
           },
-          { threshold: 0.15, ...options }
+          { threshold: 0.15 }
         );
         obs.observe(el);
       });

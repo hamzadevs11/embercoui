@@ -9,10 +9,9 @@ export function useInView(threshold = 0.1) {
     if (!el) return;
 
     let observer: IntersectionObserver;
-    let raf1: number;
     let raf2: number;
 
-    raf1 = requestAnimationFrame(() => {
+    const raf1 = requestAnimationFrame(() => {
       raf2 = requestAnimationFrame(() => {
         observer = new IntersectionObserver(
           ([entry]) => {

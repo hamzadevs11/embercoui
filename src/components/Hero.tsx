@@ -15,7 +15,7 @@ export default function Hero() {
 
   useEffect(() => {
     const onScroll = () => {
-      if (!heroRef.current || !overlayRef.current) return;
+      if (!heroRef.current) return;
       const y = window.scrollY;
       heroRef.current.style.transform = `translateY(${y * 0.4}px)`;
     };

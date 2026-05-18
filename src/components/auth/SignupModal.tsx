@@ -6,7 +6,12 @@ interface Props {
   onNavigate: (path: string) => void;
 }
 
-const InputField = ({ label, type = 'text', value, onChange, error, ...props }: any) => {
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  error?: string;
+}
+
+const InputField = ({ label, type = 'text', value, onChange, error, ...props }: InputFieldProps) => {
   const [focused, setFocused] = useState(false);
   const active = focused || value.length > 0;
   
@@ -238,35 +243,35 @@ export default function SignupModal({ onClose, onNavigate }: Props) {
                 <InputField 
                   label="Full Name" 
                   value={name} 
-                  onChange={(e: any) => setName(e.target.value)} 
+                  onChange={(e) => setName(e.target.value)} 
                   error={errors.name}
                 />
                 <InputField 
                   label="Email Address" 
                   type="email" 
                   value={email} 
-                  onChange={(e: any) => setEmail(e.target.value)} 
+                  onChange={(e) => setEmail(e.target.value)} 
                   error={errors.email}
                 />
                 <InputField 
                   label="Phone Number" 
                   type="tel" 
                   value={phone} 
-                  onChange={(e: any) => setPhone(e.target.value)} 
+                  onChange={(e) => setPhone(e.target.value)} 
                   error={errors.phone}
                 />
                 <InputField 
                   label="Password" 
                   type="password" 
                   value={password} 
-                  onChange={(e: any) => setPassword(e.target.value)} 
+                  onChange={(e) => setPassword(e.target.value)} 
                   error={errors.password}
                 />
                 <InputField 
                   label="Confirm Password" 
                   type="password" 
                   value={confirmPassword} 
-                  onChange={(e: any) => setConfirmPassword(e.target.value)} 
+                  onChange={(e) => setConfirmPassword(e.target.value)} 
                   error={errors.confirmPassword}
                 />
 
