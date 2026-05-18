@@ -129,6 +129,9 @@ export default function CartSidebar() {
                   <img
                     src={item.image}
                     alt={item.name}
+                    loading="lazy"
+                    width="64"
+                    height="64"
                     className="object-cover"
                     style={{ width: '64px', height: '64px' }}
                   />

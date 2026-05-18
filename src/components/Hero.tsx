@@ -46,6 +46,9 @@ export default function Hero() {
           <img
             src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&auto=format&fit=crop"
             alt="Fine dining"
+            loading="eager"
+            width="1200"
+            height="1800"
             className="w-full h-full object-cover"
           />
         ) : (
@@ -54,6 +57,7 @@ export default function Hero() {
             muted
             loop
             playsInline
+            preload="metadata"
             className="w-full h-full object-cover"
             poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=85&auto=format&fit=crop"
           >
@@ -64,6 +68,9 @@ export default function Hero() {
             <img
               src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=85&auto=format&fit=crop"
               alt="Fine dining"
+              loading="eager"
+              width="1400"
+              height="900"
               className="w-full h-full object-cover"
             />
           </video>

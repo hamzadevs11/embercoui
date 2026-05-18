@@ -29,9 +29,14 @@ export default function FloatingButtons() {
       >
         {/* Header */}
         <div className="bg-[#C17A3A] h-[56px] px-[20px] text-white flex justify-between items-center shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="text-xl" style={{ fontFamily: 'Cormorant Garamond, serif' }}>✦</span>
-            <span style={{ fontFamily: 'Jost, sans-serif' }} className="font-medium text-[14px]">Ember AI</span>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+              <span className="text-lg" style={{ fontFamily: 'Cormorant Garamond, serif' }}>✦</span>
+            </div>
+            <div className="flex flex-col">
+              <span style={{ fontFamily: 'Jost, sans-serif', lineHeight: 1.1 }} className="font-medium text-[14px]">Ember AI</span>
+              <span style={{ fontFamily: 'Jost, sans-serif', lineHeight: 1.1, marginTop: '2px' }} className="text-[10px] text-white/70 uppercase tracking-widest">AI Assistant</span>
+            </div>
           </div>
           <button 
             onClick={() => setIsChatOpen(false)} 
@@ -53,7 +58,7 @@ export default function FloatingButtons() {
             Ember AI Assistant
           </h3>
           <p className="text-[13px] opacity-70 max-w-[250px] shrink-0" style={{ fontFamily: 'Jost, sans-serif' }}>
-            I'm here to help with reservations, menu questions, and private events.
+            I'm here to help with reservations, menu questions, and more.
           </p>
         </div>
 
@@ -62,7 +67,7 @@ export default function FloatingButtons() {
           <div className="flex items-center gap-2 bg-[#F5F0E8] rounded-full px-4 py-2">
             <input 
               type="text" 
-              placeholder="Ask anything..." 
+              placeholder="Ask me anything about our menu, reservations, or dining experience." 
               className="flex-1 bg-transparent border-none outline-none text-sm text-[#1C2B1E] placeholder:text-[#1C2B1E]/40"
               style={{ fontFamily: 'Jost, sans-serif' }}
               readOnly
@@ -81,7 +86,7 @@ export default function FloatingButtons() {
         
         {/* BUTTON 2: AI Chat */}
         <div 
-          className="absolute flex items-center gap-3 right-[36px]"
+          className="absolute flex items-center gap-3 right-[36px] will-change-transform"
           style={{
             bottom: '160px',
             transform: isOpen ? 'translateY(0)' : 'translateY(124px)',
@@ -129,7 +134,7 @@ export default function FloatingButtons() {
 
         {/* BUTTON 1: WhatsApp */}
         <div 
-          className="absolute flex items-center gap-3 right-[36px]"
+          className="absolute flex items-center gap-3 right-[36px] will-change-transform"
           style={{
             bottom: '100px',
             transform: isOpen ? 'translateY(0)' : 'translateY(64px)',
@@ -178,7 +183,7 @@ export default function FloatingButtons() {
         </div>
 
         {/* MAIN SPEED DIAL BUTTON */}
-        <div className="absolute bottom-[32px] right-[32px] pointer-events-auto flex items-center justify-center">
+        <div className="absolute bottom-[32px] right-[32px] pointer-events-auto flex items-center justify-center will-change-transform">
           {/* Pulse Ring when closed */}
           {!isOpen && (
             <div 

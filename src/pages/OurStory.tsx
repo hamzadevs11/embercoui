@@ -182,7 +182,7 @@ export default function OurStory() {
             STORY SECTION 1 — The Beginning  (cream bg)
         ════════════════════════════════════════════════════ */}
         <section style={{ background: '#F5F0E8' }}>
-          <div className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="max-w-7xl mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             {/* Image */}
             <div
@@ -193,6 +193,9 @@ export default function OurStory() {
               <img
                 src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80"
                 alt="Interior of Ember & Co. restaurant"
+                loading="lazy"
+                width="800"
+                height="600"
                 className="w-full h-full object-cover"
                 style={{ transition: 'transform 0.6s ease', }}
                 onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
@@ -315,6 +318,9 @@ export default function OurStory() {
               <img
                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
                 alt="Close-up of a beautifully plated dish"
+                loading="lazy"
+                width="800"
+                height="600"
                 className="w-full h-full object-cover"
                 style={{ transition: 'transform 0.6s ease' }}
                 onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
@@ -406,7 +412,7 @@ export default function OurStory() {
             CTA SECTION
         ════════════════════════════════════════════════════ */}
         <section
-          className="relative overflow-hidden"
+          className="relative overflow-hidden mb-[100px]"
           style={{ background: '#F5F0E8' }}
         >
           {/* Subtle texture bar */}
@@ -528,6 +534,9 @@ function TeamCard({ member, delay }: { member: typeof team[0]; delay: number }) 
         <img
           src={member.photo}
           alt={member.name}
+          loading="lazy"
+          width="400"
+          height="533"
           className="w-full h-full object-cover object-top"
           style={{ transition: 'transform 0.6s ease' }}
           onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}

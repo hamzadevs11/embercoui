@@ -127,6 +127,9 @@ export default function LoginModal({ onClose, onNavigate }: Props) {
           <img 
             src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" 
             alt="Ambiance" 
+            loading="lazy"
+            width="600"
+            height="800"
             className="w-full h-full object-cover"
           />
           <div className="absolute bottom-[32px] left-[28px] z-20 pr-4">

@@ -85,13 +85,15 @@ const MenuCard = memo(({ item, isAdded, onAdd, index }: {
           alt={item.name}
           loading="lazy"
           decoding="async"
+          width="400"
+          height="300"
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
         />
       </div>
       <div className="p-0 pb-[14px] md:p-6 flex flex-col flex-1">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-1 md:gap-3 mb-3 md:mb-3 pt-2 md:pt-0">
           <h3
-            className="text-[#F5F0E8] text-[16px] md:text-xl leading-tight tracking-wide mb-1 md:mb-0"
+            className="text-[#F5F0E8] text-[15px] md:text-xl leading-tight tracking-wide mb-1 md:mb-0 min-h-[48px] md:min-h-0"
             style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 400 }}
           >
             {item.name}
@@ -230,6 +232,9 @@ export default function MenuPage() {
             <img 
               src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80" 
               alt="Our Menu" 
+              loading="lazy"
+              width="1600"
+              height="900"
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-[rgba(10,18,10,0.75)]" />
@@ -346,7 +351,7 @@ export default function MenuPage() {
                   <button
                     key={filter}
                     onClick={() => setActiveFilter(filter)}
-                    className={`flex-shrink-0 px-5 py-3 text-[10px] uppercase tracking-[0.15em] border transition-all duration-300 ${
+                    className={`flex-shrink-0 px-[16px] py-[8px] rounded-full text-[10px] uppercase tracking-[0.15em] border transition-all duration-300 ${
                       activeFilter === filter
                         ? 'bg-[#C17A3A] text-white border-[#C17A3A]'
                         : 'bg-[#1C2B1E] text-[#F5F0E8]/50 border-white/5 hover:border-[#C17A3A]/30 hover:text-[#F5F0E8]'

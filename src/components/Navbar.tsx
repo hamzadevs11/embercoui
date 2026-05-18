@@ -238,9 +238,10 @@ export default function Navbar({ forceDark = false }: { forceDark?: boolean }) {
               className="hover:text-white hover:translate-x-1 py-3 text-sm tracking-widest uppercase transition-all duration-200"
               style={{ 
                 fontFamily: 'Jost, sans-serif', 
-                letterSpacing: '0.12em', 
+                letterSpacing: '0.1em', 
+                fontWeight: 500,
                 fontSize: '0.8rem',
-                color: 'rgba(245,240,232,0.8)',
+                color: 'rgba(245,240,232,0.9)',
                 borderBottom: '1px solid rgba(255,255,255,0.08)'
               }}
             >

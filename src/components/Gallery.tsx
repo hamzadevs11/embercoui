@@ -71,7 +71,7 @@ export default function Gallery() {
             ✦ &nbsp; Visual Stories
           </p>
           <h2
-            className="text-forest text-5xl md:text-6xl font-light leading-none"
+            className="text-forest text-[36px] md:text-6xl font-light leading-none"
             style={{ fontFamily: 'Cormorant Garamond, serif', fontWeight: 300 }}
           >
             A Taste of Ember
@@ -90,6 +90,9 @@ export default function Gallery() {
               <img
                 src={photo.src}
                 alt={photo.alt}
+                loading="lazy"
+                width="800"
+                height="800"
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               />
               <div className="absolute inset-0 bg-forest/0 hover:bg-forest/20 transition-colors duration-300" />

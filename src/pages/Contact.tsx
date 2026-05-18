@@ -305,15 +305,10 @@ export default function Contact() {
             HEADER
         ══════════════════════════════════════════ */}
         <section
+          className="h-auto md:h-[45vh] md:min-h-[360px] flex items-center justify-center pt-[60px] pb-[40px] md:pt-[80px] md:pb-0"
           style={{
             background: 'radial-gradient(circle at center, #233425 0%, #0D1A0E 100%)',
             borderBottom: '1px solid rgba(193,122,58,0.1)',
-            height: '45vh',
-            minHeight: 360,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: 80,
           }}
         >
           <div
