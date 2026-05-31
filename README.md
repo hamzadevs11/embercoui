@@ -188,6 +188,6 @@ cd backend && npm run dev
 
 - 🌐 Live: [embercoui.vercel.app](https://embercoui.vercel.app)
 - 📧 heyhamza.dev@gmail.com
-- 💼 [LinkedIn](https://linkedin.com/in/hamzadevs11)
+- 💼 [LinkedIn](https://www.linkedin.com/in/hamza-mohsin)
 
 > Built solo in 27 days. No team. No mentor. Just documentation and determination.
